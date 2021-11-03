@@ -76,7 +76,7 @@ class AddNewTodo extends React.Component {
             deadline: this.state.deadline,
             status: this.state.status 
         };
-        fetch('http://0.0.0.0:8080/add', {
+        fetch('https://remintodo-server.herokuapp.com/add', {
             method: 'post',
             body: JSON.stringify(newTodoItem),
             headers: {
@@ -109,7 +109,7 @@ class AddNewTodo extends React.Component {
             deadline: this.state.deadline,
             status: this.state.status 
         };
-        fetch('http://0.0.0.0:8080/update', {
+        fetch('https://remintodo-server.herokuapp.com/update', {
             method: 'put',
             body: JSON.stringify(item),
             headers: {

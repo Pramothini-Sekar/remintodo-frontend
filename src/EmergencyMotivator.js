@@ -40,7 +40,7 @@ class EmergencyMotivator extends React.Component {
     }
 
     componentDidMount() {
-        fetch("http://0.0.0.0:8080/list-motivator", { mode: 'cors' })
+        fetch("https://remintodo-server.herokuapp.com/list-motivator", { mode: 'cors' })
             .then(res => res.json())
             .then(
                 (result) => {
@@ -72,7 +72,7 @@ class EmergencyMotivator extends React.Component {
             email: this.state.contactDetails.email,
             contactTime: this.state.contactTime
         };
-        fetch('http://0.0.0.0:8080/add-motivator', {
+        fetch('https://remintodo-server.herokuapp.com/add-motivator', {
             method: 'post',
             body: JSON.stringify(newMotivator),
             headers: {
@@ -140,7 +140,7 @@ class EmergencyMotivator extends React.Component {
 
     deleteMotivator(deleteId) {
 
-        var url = new URL('http://0.0.0.0:8080/delete-motivator');
+        var url = new URL('https://remintodo-server.herokuapp.com/delete-motivator');
         var params = { 'id': deleteId }
         url.search = new URLSearchParams(params).toString();
 

@@ -35,7 +35,7 @@ class ToDo extends React.Component {
     }
 
     componentDidMount() {
-        fetch("http://0.0.0.0:8080/list", { mode: 'cors' })
+        fetch("https://remintodo-server.herokuapp.com/list", { mode: 'cors' })
             .then(res => res.json())
             .then(
                 (result) => {
@@ -69,7 +69,7 @@ class ToDo extends React.Component {
 
     deleteTodo(deleteId) {
 
-        var url = new URL('http://0.0.0.0:8080/delete');
+        var url = new URL('https://remintodo-server.herokuapp.com/delete');
         var params = { 'id': deleteId }
         url.search = new URLSearchParams(params).toString();
 
