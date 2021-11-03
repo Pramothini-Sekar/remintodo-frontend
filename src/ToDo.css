@@ -1,0 +1,40 @@
+.ToDo {
+    background-color: #ccc;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    position: relative;
+}
+
+.add-todo {
+    bottom: 100px;
+    right: 35px;
+    position: absolute;
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.display-todos {
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+    max-height: 70%;
+}
+
+.nav-icon {
+    top: 15px;
+    left: 25px;      
+    position: absolute; 
+}
+
+.todoitem {
+    padding: 10px;
+}
+
+.todo-search {
+    padding: 10px;
+}

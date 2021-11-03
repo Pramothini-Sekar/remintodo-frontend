@@ -1,25 +1,51 @@
 import logo from './logo.svg';
 import './App.css';
+import Start from './Start';
+import ToDo from './ToDo';
+import EmergencyMotivator from './EmergencyMotivator';
+import Schedule from './Schedule';
+import AddNewTodo from './AddNewTodo';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useRouteMatch,
+  useParams,
+  withRouter
+} from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Switch>
+          <Route exact path="/">
+            <Start />
+          </Route>
+          <Route exact path="/todo">
+            <ToDo />
+          </Route>
+          <Route exact path="/emergency-motivator">
+            <EmergencyMotivator />
+          </Route>
+          <Route exact path="/add-todo">
+            <AddNewTodo />
+          </Route>
+          <Route exact path="/schedule">
+            <Schedule />
+          </Route>
+          {/* <Route exact path="/home">
+            <Home />
+          </Route>
+          <Route exact path="/profile">
+            <Profile />
+          </Route>
+          <Route path="/peopleNearMe/:id">
+            <PeopleNearMe />
+          </Route> */}
+      </Switch>
     </div>
   );
 }
 
-export default App;
+export default withRouter(App);

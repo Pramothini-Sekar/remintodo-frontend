@@ -1,0 +1,23 @@
+.AddNewTodo {
+    background-color: #ccc;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.text-basic {
+    padding-top: 10%;
+}
+
+.date-basic {
+    padding-top: 10%;
+}
+
+.select-status {
+    padding-top: 10%;
+}
+
+.task-add-button {
+    padding-top: 10%;
+}

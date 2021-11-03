@@ -1,0 +1,24 @@
+.EmergencyMotivator {
+    background-color: #ccc;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.text-basic {
+    padding-top: 10%;
+}
+
+.select-basic {
+    padding-top: 10%;
+}
+
+.emergency-button {
+    padding-top: 10%;
+}
+
+.motivator-contact {
+    padding-left: 20%;
+    padding-top: 10%;
+}
