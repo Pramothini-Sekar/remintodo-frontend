@@ -11,6 +11,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import List from '@mui/material/List';
 import ToDoItem from './ToDoItem';
 import BottomNavigator from './BottomNavigator';
+import env from './env';
 import './ToDo.css';
 
 class ToDo extends React.Component {
@@ -36,8 +37,8 @@ class ToDo extends React.Component {
     }
 
     componentDidMount() {
-        const url = 'https://remintodo-server.herokuapp.com/' + this.props.history.location.state?.number + '/list';
-        // const url = 'http://0.0.0.0:5000/' + this.props.history.location.state?.number + '/list';
+        const url = env + this.props.history.location.state?.number + '/list';
+
         fetch(url, { mode: 'cors' })
             .then(res => res.json())
             .then(
@@ -72,8 +73,8 @@ class ToDo extends React.Component {
 
     deleteTodo(deleteId) {
 
-        const url_val = 'https://remintodo-server.herokuapp.com/' + this.props.history.location.state?.number + '/delete';
-        // const url_val = 'http://0.0.0.0:5000/' + this.props.history.location.state?.number + '/delete';
+        const url_val = env + this.props.history.location.state?.number + '/delete';
+
         var url = new URL(url_val);
         var params = { 'id': deleteId }
         url.search = new URLSearchParams(params).toString();

@@ -4,6 +4,7 @@ import './SignUp.css';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { withRouter } from 'react-router-dom';
+import env from '../env';
 
 class Login extends React.Component {
 
@@ -26,42 +27,29 @@ class Login extends React.Component {
     }
 
     login() {
-        let newUser = {
-            id: this.state.contactDetails.number,
-            name: this.state.name,
-            age: this.state.age,
-            occupation: this.state.occupation,
-            number: this.state.contactDetails.number,
-            email: this.state.contactDetails.email,
-            contactTime: this.state.contactTime
-        };
+        const url = env + 'user?=' + this.state.contactDetails.number;
 
-        const url = 'https://remintodo-server.herokuapp.com/user/' + this.state.contactDetails.number;
-        // const url = 'http://0.0.0.0:5000/user/' + this.state.contactDetails.number ;
-
-        fetch(url, {
-            method: 'post',
-            body: JSON.stringify(newUser),
-            headers: {
-                'Content-Type': 'application/json',
-                'mode': 'cors'
-            },
-        }).then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-                console.log('List:', this.state.list);
-                this.setState({
-                    ...this.state,
-                    list: data
+        fetch(url, { mode: 'cors' })
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    console.log('Success:', result);
+                    console.log('List:', this.state.list);
+                    this.setState({
+                        ...this.state,
+                        list: result
+                    }, () => {
+                        this.props.history.push('/emergency-motivator', { number: this.state.contactDetails.number });
+                    });
+                },
+                // Note: it's important to handle errors here
+                // instead of a catch() block so that we don't swallow
+                // exceptions from actual bugs in components.
+                (error) => {
+                    console.error('Error:', error);
                 }, () => {
-                    this.props.history.push('/emergency-motivator', { number: this.state.contactDetails.number });
+                    this.props.history.push('/');
                 });
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            }, () => {
-                this.props.history.push('/');
-            });
     }
 
     setContactNumber(event) {

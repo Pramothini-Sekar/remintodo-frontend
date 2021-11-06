@@ -11,7 +11,7 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DesktopDateTimePicker from '@mui/lab/DesktopDateTimePicker';
 import { v4 as uuidv4 } from 'uuid'; 
 import BottomNavigator from './BottomNavigator';
-
+import env from './env';
 import './AddNewTodo.css';
 
 class AddNewTodo extends React.Component {
@@ -77,8 +77,7 @@ class AddNewTodo extends React.Component {
             status: this.state.status 
         };
 
-        const url = 'https://remintodo-server.herokuapp.com/' + this.props.history.location.state?.number + '/add';
-        // const url = 'http://0.0.0.0:5000/' + this.props.history.location.state?.number + '/add';
+        const url = env + this.props.history.location.state?.number + '/add';
 
         fetch(url, {
             method: 'post',
@@ -114,8 +113,7 @@ class AddNewTodo extends React.Component {
             status: this.state.status 
         };
 
-        const url = 'https://remintodo-server.herokuapp.com/' + this.props.history.location.state?.number + '/update';
-        // const url = 'http://0.0.0.0:5000/' + this.props.history.location.state?.number + '/update';
+        const url = env + this.props.history.location.state?.number + '/update';
         fetch(url, {
             method: 'put',
             body: JSON.stringify(item),

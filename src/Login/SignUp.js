@@ -8,6 +8,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import env from '../env';
 
 class SignUp extends React.Component {
 
@@ -45,8 +46,7 @@ class SignUp extends React.Component {
             contactTime: this.state.contactTime
         };
 
-        const url = 'https://remintodo-server.herokuapp.com/add-user';
-        // const url = 'http://0.0.0.0:5000/add-user' ;
+        const url = env + 'add-user';
 
         fetch(url, {
             method: 'post',

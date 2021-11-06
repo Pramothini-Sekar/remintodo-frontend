@@ -14,7 +14,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import BottomNavigator from './BottomNavigator';
 import { v4 as uuidv4 } from 'uuid';
-
+import env from './env';
 class EmergencyMotivator extends React.Component {
 
     constructor(props) {
@@ -40,8 +40,8 @@ class EmergencyMotivator extends React.Component {
     }
 
     componentDidMount() {
-        const url = 'https://remintodo-server.herokuapp.com/' + this.props.history.location.state?.number + '/list-motivator';
-        // const url = 'http://0.0.0.0:5000/' + this.props.history.location.state?.number + '/list-motivator';
+        const url = env + this.props.history.location.state?.number + '/list-motivator';
+
         fetch(url, { mode: 'cors' })
             .then(res => res.json())
             .then(
@@ -75,8 +75,7 @@ class EmergencyMotivator extends React.Component {
             contactTime: this.state.contactTime
         };
 
-        const url = 'https://remintodo-server.herokuapp.com/' + this.props.history.location.state?.number + '/add-motivator';
-        // const url = 'http://0.0.0.0:5000/' + this.props.history.location.state?.number + '/add-motivator';
+        const url = env + this.props.history.location.state?.number + '/add-motivator';
 
         fetch(url, {
             method: 'post',
@@ -146,8 +145,8 @@ class EmergencyMotivator extends React.Component {
 
     deleteMotivator(deleteId) {
 
-        const url_val = 'https://remintodo-server.herokuapp.com/' + this.props.history.location.state?.number + '/delete-motivator';
-        // const url_val = 'http://0.0.0.0:5000/' + this.props.history.location.state?.number + '/delete-motivator';
+        const url_val = env + this.props.history.location.state?.number + '/delete-motivator';
+
         var url = new URL(url_val);
         var params = { 'id': deleteId }
         url.search = new URLSearchParams(params).toString();
