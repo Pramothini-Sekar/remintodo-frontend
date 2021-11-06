@@ -40,7 +40,9 @@ class EmergencyMotivator extends React.Component {
     }
 
     componentDidMount() {
-        fetch("https://remintodo-server.herokuapp.com/list-motivator", { mode: 'cors' })
+        const url = 'https://remintodo-server.herokuapp.com/' + this.props.history.location.state?.number + '/list-motivator';
+        // const url = 'http://0.0.0.0:5000/' + this.props.history.location.state?.number + '/list-motivator';
+        fetch(url, { mode: 'cors' })
             .then(res => res.json())
             .then(
                 (result) => {
@@ -72,7 +74,11 @@ class EmergencyMotivator extends React.Component {
             email: this.state.contactDetails.email,
             contactTime: this.state.contactTime
         };
-        fetch('https://remintodo-server.herokuapp.com/add-motivator', {
+
+        const url = 'https://remintodo-server.herokuapp.com/' + this.props.history.location.state?.number + '/add-motivator';
+        // const url = 'http://0.0.0.0:5000/' + this.props.history.location.state?.number + '/add-motivator';
+
+        fetch(url, {
             method: 'post',
             body: JSON.stringify(newMotivator),
             headers: {
@@ -87,13 +93,13 @@ class EmergencyMotivator extends React.Component {
                     ...this.state,
                     list: data
                 }, () => {
-                    this.props.history.push('/todo');
+                    this.props.history.push('/todo', { number: this.props.history.location.state?.number });
                 });
             })
             .catch((error) => {
                 console.error('Error:', error);
             }, () => {
-                this.props.history.push('/todo');
+                this.props.history.push('/todo', { number: this.props.history.location.state?.number });
             });
     }
 
@@ -140,7 +146,9 @@ class EmergencyMotivator extends React.Component {
 
     deleteMotivator(deleteId) {
 
-        var url = new URL('https://remintodo-server.herokuapp.com/delete-motivator');
+        const url_val = 'https://remintodo-server.herokuapp.com/' + this.props.history.location.state?.number + '/delete-motivator';
+        // const url_val = 'http://0.0.0.0:5000/' + this.props.history.location.state?.number + '/delete-motivator';
+        var url = new URL(url_val);
         var params = { 'id': deleteId }
         url.search = new URLSearchParams(params).toString();
 
@@ -261,7 +269,7 @@ class EmergencyMotivator extends React.Component {
 
                         </ListItem>
                     </div>}
-                <BottomNavigator history={this.props.history} />
+                <BottomNavigator history={this.props.history} number={this.props.history.location.state?.number}/>
             </div>
         );
     }

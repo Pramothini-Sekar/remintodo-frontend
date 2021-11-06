@@ -9,7 +9,7 @@ class Schedule extends React.Component {
         return (
             <div className="Schedule">
                 <h2>Schedule</h2>
-                <BottomNavigator history={this.props.history} />
+                <BottomNavigator history={this.props.history} number={this.props.history.location.state?.number}/>
             </div>
         );
     }

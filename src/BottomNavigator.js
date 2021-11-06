@@ -16,15 +16,15 @@ class BottomNavigator extends React.Component {
     }
 
     navigateToSchedule() {
-        this.props.history.push('/schedule');
+        this.props.history.push('/schedule', { number: this.props.number });
     }
 
     navigateToHome() {
-        this.props.history.push('/todo');
+        this.props.history.push('/todo', { number: this.props.number });
     }
 
     navigateToMotivator() {
-        this.props.history.push('/emergency-motivator');
+        this.props.history.push('/emergency-motivator', { number: this.props.number });
     }
 
     render() {

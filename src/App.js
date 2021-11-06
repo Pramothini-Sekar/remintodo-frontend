@@ -3,6 +3,8 @@ import './App.css';
 import Start from './Start';
 import ToDo from './ToDo';
 import EmergencyMotivator from './EmergencyMotivator';
+import Login from './Login/Login';
+import SignUp from './Login/SignUp';
 import Schedule from './Schedule';
 import AddNewTodo from './AddNewTodo';
 import {
@@ -24,6 +26,12 @@ function App() {
           </Route>
           <Route exact path="/todo">
             <ToDo />
+          </Route>
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          <Route exact path="/signup">
+            <SignUp />
           </Route>
           <Route exact path="/emergency-motivator">
             <EmergencyMotivator />

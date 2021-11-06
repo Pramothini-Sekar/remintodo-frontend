@@ -24,7 +24,8 @@ class ToDo extends React.Component {
             checked: [],
             setChecked: false,
             newTodo: '',
-            searchValue: ''
+            searchValue: '',
+            number: (this.props.history.location.state?.number) ? this.props.history.location.state?.number : ''
         }
 
         this.handleToggle = this.handleToggle.bind(this);
@@ -35,7 +36,9 @@ class ToDo extends React.Component {
     }
 
     componentDidMount() {
-        fetch("https://remintodo-server.herokuapp.com/list", { mode: 'cors' })
+        const url = 'https://remintodo-server.herokuapp.com/' + this.props.history.location.state?.number + '/list';
+        // const url = 'http://0.0.0.0:5000/' + this.props.history.location.state?.number + '/list';
+        fetch(url, { mode: 'cors' })
             .then(res => res.json())
             .then(
                 (result) => {
@@ -60,16 +63,18 @@ class ToDo extends React.Component {
     }
 
     addNewTodo() {
-        this.props.history.push('/add-todo');
+        this.props.history.push('/add-todo', { number: this.props.history.location.state?.number });
     }
 
     updateTodoItem(todoItem) {
-        this.props.history.push('/add-todo', { data: todoItem });
+        this.props.history.push('/add-todo', { data: todoItem, number: this.props.history.location.state?.number });
     }
 
     deleteTodo(deleteId) {
 
-        var url = new URL('https://remintodo-server.herokuapp.com/delete');
+        const url_val = 'https://remintodo-server.herokuapp.com/' + this.props.history.location.state?.number + '/delete';
+        // const url_val = 'http://0.0.0.0:5000/' + this.props.history.location.state?.number + '/delete';
+        var url = new URL(url_val);
         var params = { 'id': deleteId }
         url.search = new URLSearchParams(params).toString();
 
@@ -168,7 +173,7 @@ class ToDo extends React.Component {
                         <AddIcon />
                     </Fab>
                 </div>
-                <BottomNavigator history={this.props.history} />
+                <BottomNavigator history={this.props.history} number={this.props.history.location.state?.number} />
             </div>
         );
     }

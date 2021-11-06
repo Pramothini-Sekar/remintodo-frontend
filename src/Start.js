@@ -9,7 +9,7 @@ function Start() {
 
     const history = useHistory();
     function handleClick() {
-        history.push("/emergency-motivator");
+        history.push("/login");
     }
     
     return (

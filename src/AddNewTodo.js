@@ -76,7 +76,11 @@ class AddNewTodo extends React.Component {
             deadline: this.state.deadline,
             status: this.state.status 
         };
-        fetch('https://remintodo-server.herokuapp.com/add', {
+
+        const url = 'https://remintodo-server.herokuapp.com/' + this.props.history.location.state?.number + '/add';
+        // const url = 'http://0.0.0.0:5000/' + this.props.history.location.state?.number + '/add';
+
+        fetch(url, {
             method: 'post',
             body: JSON.stringify(newTodoItem),
             headers: {
@@ -91,13 +95,13 @@ class AddNewTodo extends React.Component {
                     ...this.state,
                     list: data
                 }, () => {
-                    this.props.history.push('/todo');
+                    this.props.history.push('/todo', {number: this.props.history.location.state?.number});
                 });
             })
             .catch((error) => {
                 console.error('Error:', error);
             }, () => {
-                this.props.history.push('/todo');
+                this.props.history.push('/todo', {number: this.props.history.location.state?.number});
             });
     }
 
@@ -109,7 +113,10 @@ class AddNewTodo extends React.Component {
             deadline: this.state.deadline,
             status: this.state.status 
         };
-        fetch('https://remintodo-server.herokuapp.com/update', {
+
+        const url = 'https://remintodo-server.herokuapp.com/' + this.props.history.location.state?.number + '/update';
+        // const url = 'http://0.0.0.0:5000/' + this.props.history.location.state?.number + '/update';
+        fetch(url, {
             method: 'put',
             body: JSON.stringify(item),
             headers: {
@@ -195,7 +202,7 @@ class AddNewTodo extends React.Component {
                     :
                     <Button sx={{ m: 1, minWidth: 230 }} onClick={this.updateTodoItem} variant="outlined">Update Task</Button>}
                 </div>
-                <BottomNavigator history={this.props.history} />
+                <BottomNavigator history={this.props.history} number={this.props.history.location.state?.number}/>
             </div>
         );
     }
