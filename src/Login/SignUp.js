@@ -23,7 +23,8 @@ class SignUp extends React.Component {
                 email: ''
             },
             contactTime: '',
-            list: []
+            list: [],
+            validationCode: '000000'
         }
 
         this.setName = this.setName.bind(this);
@@ -61,9 +62,10 @@ class SignUp extends React.Component {
                 console.log('List:', this.state.list);
                 this.setState({
                     ...this.state,
-                    list: data
+                    list: data,
+                    validationCode: data.validationCode
                 }, () => {
-                    this.props.history.push('/emergency-motivator', { number: this.state.contactDetails.number });
+                    this.props.history.push('/code-validation', { validationCode: this.state.validationCode, number: this.state.contactDetails.number });
                 });
             })
             .catch((error) => {

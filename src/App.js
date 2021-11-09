@@ -3,6 +3,7 @@ import './App.css';
 import Start from './Start';
 import ToDo from './ToDo';
 import EmergencyMotivator from './EmergencyMotivator';
+import TwilioCodeValidation from './TwilioCodeValidation';
 import Login from './Login/Login';
 import SignUp from './Login/SignUp';
 import Schedule from './Schedule';
@@ -35,6 +36,9 @@ function App() {
           </Route>
           <Route exact path="/emergency-motivator">
             <EmergencyMotivator />
+          </Route>
+          <Route exact path="/code-validation">
+            <TwilioCodeValidation />
           </Route>
           <Route exact path="/add-todo">
             <AddNewTodo />

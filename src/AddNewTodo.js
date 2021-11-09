@@ -7,8 +7,10 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import momentTimezone from "moment-timezone";
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DesktopDateTimePicker from '@mui/lab/DesktopDateTimePicker';
+import MomentAdapter from '@mui/lab/AdapterMoment';
 import { v4 as uuidv4 } from 'uuid'; 
 import BottomNavigator from './BottomNavigator';
 import env from './env';
@@ -140,6 +142,9 @@ class AddNewTodo extends React.Component {
     }
 
     render() {
+        const timeZoneFromServer = "America/New_York";
+        const { moment } = new MomentAdapter({ instance: momentTimezone });
+        const dateWithTimeZone = moment(this.state.deadline).tz(timeZoneFromServer);
         return (
             <div>
                 <h2 style={{ color: '#1976D2' }}>New Task</h2>
@@ -165,11 +170,11 @@ class AddNewTodo extends React.Component {
                         />
                     </div>
                     <div className="date-basic">
-                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <LocalizationProvider dateAdapter={MomentAdapter}>
                             <DesktopDateTimePicker
                                 renderInput={(props) => <TextField {...props} />}
                                 label="Task Deadline"
-                                value={this.state.deadline}
+                                value={dateWithTimeZone}
                                 onChange={(newValue) => {
                                     this.setDeadline(newValue);
                                 }}
