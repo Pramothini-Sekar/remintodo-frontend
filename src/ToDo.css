@@ -8,8 +8,8 @@
 }
 
 .add-todo {
-    bottom: 100px;
-    right: 35px;
+    bottom: 5vh;
+    right: 5vw;
     position: absolute;
 }
 
