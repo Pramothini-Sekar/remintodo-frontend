@@ -18,6 +18,8 @@ import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { Steps } from 'intro.js-react';
+import "intro.js/introjs.css";
 import './ToDo.css';
 
 interface ExpandMoreProps extends IconButtonProps {

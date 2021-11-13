@@ -14,6 +14,8 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import BottomNavigator from './BottomNavigator';
 import { v4 as uuidv4 } from 'uuid';
+import { Steps } from 'intro.js-react';
+import "intro.js/introjs.css";
 import env from './env';
 class EmergencyMotivator extends React.Component {
 
@@ -27,7 +29,21 @@ class EmergencyMotivator extends React.Component {
                 email: ''
             },
             contactTime: '',
-            list: []
+            list: [],
+            stepsEnabled: true,
+            initialStep: 0,
+            steps: [
+                {
+                    element: '.emergency-motivator',
+                    intro: 'Add someone who would push and nag you to complete your stuff!',
+                }
+            ],
+            existingMotivatorSteps: [
+                {
+                    element: '.existing-emergency-motivator',
+                    intro: 'Final Step! Verify your motivator and let us go to the todo list!',
+                }
+            ]
         }
 
         this.setName = this.setName.bind(this);
@@ -37,6 +53,8 @@ class EmergencyMotivator extends React.Component {
         this.setContactTime = this.setContactTime.bind(this);
         this.addNewMotivator = this.addNewMotivator.bind(this);
         this.deleteMotivator = this.deleteMotivator.bind(this);
+        this.navigateToList = this.navigateToList.bind(this);
+        this.onExit = this.onExit.bind(this);
     }
 
     componentDidMount() {
@@ -63,6 +81,10 @@ class EmergencyMotivator extends React.Component {
                     });
                 }
             )
+    }
+
+    navigateToList() {
+        this.props.history.push('/todo', { number: this.props.history.location.state?.number });
     }
 
     addNewMotivator() {
@@ -172,6 +194,10 @@ class EmergencyMotivator extends React.Component {
             });
     }
 
+    onExit() {
+        this.setState({ stepsEnabled: false });
+    }
+
     render() {
 
         let motivatorExists = false;
@@ -181,11 +207,24 @@ class EmergencyMotivator extends React.Component {
             item = list[0];
             motivatorExists = true;
         }
+
+        const {
+            stepsEnabled,
+            steps,
+            existingMotivatorSteps,
+            initialStep
+        } = this.state;
         return (
-            <div className="EmergencyMotivator">
+            <div className="EmergencyMotivator emergency-motivator">
                 <h2 style={{ color: '#1976D2' }}>Emergency Motivator</h2>
-                { !motivatorExists ?
+                {!motivatorExists ?
                     <div>
+                        <Steps
+                            enabled={stepsEnabled}
+                            steps={steps}
+                            initialStep={initialStep}
+                            onExit={this.onExit}
+                        />
                         <div className="add-contact">
                             <div className="text-basic">
                                 <TextField
@@ -248,9 +287,16 @@ class EmergencyMotivator extends React.Component {
                     </div>
                     :
                     <div className="motivator-contact">
+                        <Steps
+                            enabled={stepsEnabled}
+                            steps={existingMotivatorSteps}
+                            initialStep={initialStep}
+                            onExit={this.onExit}
+                        />
                         <ListItem
                             key={item.id}
                             disablePadding
+                            className="existing-emergency-motivator"
                         >
                             <TextField
                                 id={item.id}
@@ -267,8 +313,11 @@ class EmergencyMotivator extends React.Component {
                             />
 
                         </ListItem>
+                        <div className="emergency-button">
+                            <Button sx={{ m: 1, minWidth: 200 }} onClick={this.navigateToList} variant="outlined">Verified Motivator</Button>
+                        </div>
                     </div>}
-                <BottomNavigator history={this.props.history} number={this.props.history.location.state?.number}/>
+                <BottomNavigator history={this.props.history} number={this.props.history.location.state?.number} />
             </div>
         );
     }

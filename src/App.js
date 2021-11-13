@@ -8,6 +8,8 @@ import Login from './Login/Login';
 import SignUp from './Login/SignUp';
 import Schedule from './Schedule';
 import AddNewTodo from './AddNewTodo';
+import 'intro.js/introjs.css';
+
 import {
   BrowserRouter as Router,
   Switch,

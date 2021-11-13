@@ -4,7 +4,9 @@ import './SignUp.css';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { withRouter } from 'react-router-dom';
+import { Steps } from 'intro.js-react';
 import env from '../env';
+import "intro.js/introjs.css";
 
 class Login extends React.Component {
 
@@ -14,12 +16,30 @@ class Login extends React.Component {
             contactDetails: {
                 number: '',
             },
-            list: []
+            list: [],
+            stepsEnabled: true,
+            initialStep: 0,
+            steps: [
+                {
+                    element: '.start',
+                    intro: 'Let us get started with Remintodo!',
+                },
+                {
+                    element: '.login',
+                    intro: 'You can directly login if you are a returning user',
+                },
+                {
+                    element: '.signup',
+                    intro: 'Sign up if this is your first time using Remintodo!',
+                }
+            ]
+
         }
 
         this.setContactNumber = this.setContactNumber.bind(this);
         this.signup = this.signup.bind(this);
         this.login = this.login.bind(this);
+        this.onExit = this.onExit.bind(this);
     }
 
     signup() {
@@ -62,16 +82,31 @@ class Login extends React.Component {
         })
     }
 
-    render() {
+    onExit() {
+        this.setState({ stepsEnabled: false });
+    }
 
+    render() {
+        const {
+            stepsEnabled,
+            steps,
+            initialStep
+        } = this.state;
         return (
             <div className="Login">
+                <Steps
+                    enabled={stepsEnabled}
+                    steps={steps}
+                    initialStep={initialStep}
+                    onExit={this.onExit}
+                />
                 <h2 style={{ color: '#1976D2' }}>Login</h2>
                 <div>
                     <div className="user-contact">
                         <div className="text-basic">
                             <TextField
                                 id="number"
+                                className="login"
                                 label="Contact Number"
                                 variant="outlined"
                                 value={this.state.contactDetails.number || ''}
@@ -84,7 +119,7 @@ class Login extends React.Component {
                     </div>
                     <h6 style={{ color: '#1976D2' }}>Don't have an account?</h6>
                     <div className="signup-button">
-                        <Button sx={{ m: 1, minWidth: 200 }} onClick={this.signup} variant="outlined">Sign Up</Button>
+                        <Button className="signup" sx={{ m: 1, minWidth: 200 }} onClick={this.signup} variant="outlined">Sign Up</Button>
                     </div>
                 </div>
             </div>

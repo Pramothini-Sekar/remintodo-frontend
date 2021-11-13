@@ -4,21 +4,22 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
+    width:100%
 }
 
 .text-basic {
-    padding-top: 10%;
+    padding-top: 1em;
 }
 
 .select-basic {
-    padding-top: 10%;
+    padding-top: 1em;
 }
 
 .emergency-button {
-    padding-top: 10%;
+    padding-top: 1em;
 }
 
 .motivator-contact {
-    padding-left: 20%;
-    padding-top: 10%;
+    display: table;
+    margin: 0 auto;
 }

@@ -4,10 +4,10 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    padding-top: 50%;
+    padding-top: 10em;
 }
 
 .get-started-button {
     /* background-color: #d9f0ff; */
-    padding-top: 20%;
+    padding-top: 3em;
 }

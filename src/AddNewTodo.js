@@ -13,6 +13,8 @@ import DesktopDateTimePicker from '@mui/lab/DesktopDateTimePicker';
 import MomentAdapter from '@mui/lab/AdapterMoment';
 import { v4 as uuidv4 } from 'uuid'; 
 import BottomNavigator from './BottomNavigator';
+import { Steps } from 'intro.js-react';
+import "intro.js/introjs.css";
 import env from './env';
 import './AddNewTodo.css';
 

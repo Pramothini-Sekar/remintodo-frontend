@@ -11,6 +11,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import List from '@mui/material/List';
 import ToDoItem from './ToDoItem';
 import BottomNavigator from './BottomNavigator';
+import { Steps } from 'intro.js-react';
+import "intro.js/introjs.css";
 import env from './env';
 import './ToDo.css';
 
@@ -26,7 +28,19 @@ class ToDo extends React.Component {
             setChecked: false,
             newTodo: '',
             searchValue: '',
-            number: (this.props.history.location.state?.number) ? this.props.history.location.state?.number : ''
+            number: (this.props.history.location.state?.number) ? this.props.history.location.state?.number : '',
+            stepsEnabled: true,
+            initialStep: 0,
+            steps: [
+                {
+                    element: '.add-task',
+                    intro: 'You can add new tasks into your todo list',
+                },
+                {
+                    element: '.search-task',
+                    intro: 'You can search for any tasks you want to go over',
+                }
+            ]
         }
 
         this.handleToggle = this.handleToggle.bind(this);
@@ -34,6 +48,7 @@ class ToDo extends React.Component {
         this.updateTodoItem = this.updateTodoItem.bind(this);
         this.deleteTodo = this.deleteTodo.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
+        this.onExit = this.onExit.bind(this);
     }
 
     componentDidMount() {
@@ -140,17 +155,34 @@ class ToDo extends React.Component {
             newTodo: event.target.value
         })
     }
+
+    onExit() {
+        this.setState({ stepsEnabled: false });
+    }
+
     render() {
 
+        const {
+            stepsEnabled,
+            steps,
+            initialStep
+        } = this.state;
         return (
             <div className="ToDo">
                 <div className="page-header">
                     <h2 style={{ color: '#1976D2' }}>Priority List</h2>
                 </div>
+                <Steps
+                    enabled={stepsEnabled}
+                    steps={steps}
+                    initialStep={initialStep}
+                    onExit={this.onExit}
+                />
                 <div className="todo-search">
                     <OutlinedInput
                         id="outlined-adornment-amount"
                         value={this.state.searchValue}
+                        className="search-task"
                         placeholder="Search for tasks"
                         onChange={this.handleSearch}
                         startAdornment={<InputAdornment position="start">
@@ -171,7 +203,7 @@ class ToDo extends React.Component {
                 </div>
                 <div className="add-todo">
                     <Fab color="primary" aria-label="add" onClick={this.addNewTodo} >
-                        <AddIcon />
+                        <AddIcon className="add-task"/>
                     </Fab>
                 </div>
                 <BottomNavigator history={this.props.history} number={this.props.history.location.state?.number} />
